@@ -85,22 +85,37 @@ animateElements.forEach(el => {
 });
 
 // Typing animation for hero subtitle
-const subtitle = document.querySelector('.hero-subtitle');
-const subtitleText = subtitle.textContent;
-subtitle.textContent = '';
-
-let i = 0;
-const typeWriter = () => {
-    if (i < subtitleText.length) {
-        subtitle.textContent += subtitleText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
-    }
+const initTypingAnimation = () => {
+    const subtitle = document.querySelector('.hero-subtitle');
+    if (!subtitle) return;
+    
+    const subtitleText = subtitle.textContent;
+    subtitle.textContent = '';
+    subtitle.style.borderRight = '2px solid #667eea';
+    subtitle.style.animation = 'blink 1s infinite';
+    
+    let i = 0;
+    const typeWriter = () => {
+        if (i < subtitleText.length) {
+            subtitle.textContent += subtitleText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 80);
+        } else {
+            // Remove cursor after typing is complete
+            setTimeout(() => {
+                subtitle.style.borderRight = 'none';
+                subtitle.style.animation = 'none';
+            }, 1000);
+        }
+    };
+    
+    // Start typing animation
+    setTimeout(typeWriter, 1500);
 };
 
 // Start typing animation after page load
 window.addEventListener('load', () => {
-    setTimeout(typeWriter, 1000);
+    initTypingAnimation();
 });
 
 // Parallax effect for hero section (disabled on mobile for performance)

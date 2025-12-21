@@ -1552,3 +1552,14 @@ section {
         color: #fff;
     }
 }
+/* Typing animation cursor */
+@keyframes blink {
+    0%, 50% { border-color: #667eea; }
+    51%, 100% { border-color: transparent; }
+}
+
+/* Ensure typing animation works on all devices */
+.hero-subtitle {
+    min-height: 1.5em;
+    display: inline-block;
+}
